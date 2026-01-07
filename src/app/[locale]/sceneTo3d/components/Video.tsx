@@ -11,6 +11,7 @@ export const Video = () => {
 
   return (
     <video
+      autoPlay
       loop
       muted
       playsInline
