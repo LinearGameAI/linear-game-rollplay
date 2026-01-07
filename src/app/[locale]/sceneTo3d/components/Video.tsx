@@ -6,7 +6,8 @@ export const Video = () => {
   //获取查询参数videoId
   const searchParams = useSearchParams()
   const videoId = searchParams.get("videoId")
-  const videoUrl = videoId || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+  //'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+  const videoUrl = videoId || '/images/video.mp4'
 
   return (
     <video

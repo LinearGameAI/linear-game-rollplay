@@ -9,6 +9,7 @@ import GameButton from "./components/GameButton"
 import { KeyButtonProvider } from "./context/KeyButtonContext"
 import { DirectionKey } from "./types"
 import { Video } from "./components/Video"
+import ControlArea from "./components/ControlArea"
 
 export default function SceneTo3dPage() {
   const t = useTranslations("SceneTo3d") // Assuming you might have translations later
@@ -59,14 +60,18 @@ export default function SceneTo3dPage() {
         {/* Control Panel */}
         <ControlPanel />
 
+        {/* Control Areas */}
+        {/* <ControlArea position="left" />
+        <ControlArea position="right" /> */}
+
         {/* Overlay Content */}
         <div className="relative z-10 w-full h-full">
           {/* Title (Optional) */}
           <div className="absolute top-8 left-0 right-0 text-center text-white/50 flex flex-col gap-4 items-center">
-            <h1 className="text-2xl font-bold">Scene 3D</h1>
+            <h1 className="text-2xl font-bold">Roll-01 Realtime Model</h1>
           </div>
 
-          <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex flex-row items-center gap-2">
+          <div className="hidden absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex flex-row items-center gap-2">
             <GameButton>Not now</GameButton>
             <GameButton>Pick my ship</GameButton>
           </div>

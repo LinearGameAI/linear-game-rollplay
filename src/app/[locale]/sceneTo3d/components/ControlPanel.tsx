@@ -13,7 +13,7 @@ export default function ControlPanel() {
   }
 
   return (
-    <div className="fixed top-8 right-8 z-50 p-4 rounded-xl bg-black/60 backdrop-blur-md border border-white/20 select-none w-64">
+    <div className="hidden fixed top-8 right-8 z-50 p-4 rounded-xl bg-black/60 backdrop-blur-md border border-white/20 select-none w-64">
       <h3 className="text-white font-bold mb-4 text-sm uppercase tracking-wider">Control Panel</h3>
       
       <div className="space-y-4">
