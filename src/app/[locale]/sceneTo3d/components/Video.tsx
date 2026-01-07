@@ -11,11 +11,10 @@ export const Video = () => {
 
   return (
     <video
-      autoPlay
       loop
       muted
       playsInline
-      className="absolute top-0 left-0 w-full h-full object-cover z-0"
+      className="absolute top-0 left-0 w-full h-full object-contain z-0"
     >
       <source src={videoUrl} />
       Your browser does not support the video tag.
