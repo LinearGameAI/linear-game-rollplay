@@ -61,8 +61,8 @@ export default function SceneTo3dPage() {
         <ControlPanel />
 
         {/* Control Areas */}
-        <ControlArea position="left" />
-        <ControlArea position="right" />
+        {/* <ControlArea position="left" />
+        <ControlArea position="right" /> */}
 
         {/* Overlay Content */}
         <div className="relative z-10 w-full h-full">

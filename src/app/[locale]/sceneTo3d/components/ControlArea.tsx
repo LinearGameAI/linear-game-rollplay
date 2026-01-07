@@ -29,7 +29,7 @@ export default function ControlArea({ position, className, children }: ControlAr
         "absolute z-20 w-[40%] aspect-[2/1] mt-[12%]", // Dimensions
         "flex items-center justify-center",
         "transition-all duration-500 ease-out", // Smooth transition
-        "group cursor-pointer", // Interaction
+        "group", // Interaction
         positionClasses,
         className
       )}
