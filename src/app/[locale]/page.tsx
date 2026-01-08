@@ -1,28 +1,21 @@
-'use client'
-
 import LocaleSwitcher from "@/src/components/LocaleSwitcher";
-import { useRouter } from "@/src/i18n/navigation";
+import { Link } from "@/src/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import Image from "next/image";
-import { use, useEffect } from "react";
+import { use } from "react";
 
 export default function Home({params}:{params: Promise<{locale: string}>}) {
   const {locale} = use(params)
-  // setRequestLocale(locale)
+  setRequestLocale(locale)
   
   const t = useTranslations("test")
-  
-  const router = useRouter()
-
-  useEffect(() => {
-    router.push(`/${locale}/sceneTo3d`)
-  }, [locale])
-
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+        <LocaleSwitcher />
+        <Link href="/sceneTo3d">go to sceneTo3d</Link>
         <Image
           className="dark:invert"
           src="/next.svg"
@@ -32,7 +25,6 @@ export default function Home({params}:{params: Promise<{locale: string}>}) {
           priority
         />
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <LocaleSwitcher />
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
             {t('header')}
           </h1>
