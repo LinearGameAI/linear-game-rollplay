@@ -4,7 +4,7 @@ import { useKeyButtonConfig, KeyButtonConfig } from '../context/KeyButtonContext
 import { usePostSessionService } from '../services'
 
 export default function ControlPanel() {
-  const { mutateAsync } = usePostSessionService()
+  const { mutateAsync, isPending } = usePostSessionService()
   const { config, setConfig } = useKeyButtonConfig()
   const [prompt, setPrompt] = useState('')
   const [selectedImage, setSelectedImage] = useState<File | null>(null)
@@ -130,6 +130,7 @@ export default function ControlPanel() {
         {/* Submit Button */}
         <button
           onClick={handleSubmit}
+          disabled={isPending}
           className="w-full px-4 py-2 bg-white/20 hover:bg-white/30 border border-white/30 rounded-lg text-white text-sm font-medium transition-colors"
         >
           Submit
