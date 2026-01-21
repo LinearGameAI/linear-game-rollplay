@@ -19,14 +19,20 @@ const initialState = {
 
 }
 
-const host = process.env.NEXT_PUBLIC_API_HOST || ''
 // 创建 store
 export const useSceneStore = create<SceneState>((set, get) => ({
   ...initialState,
   setSessionId: (session_id: string) => {
     console.log('session_id=', session_id)
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const host = process.env.NEXT_PUBLIC_API_HOST || '54.71.99.124:8000'
+    const wsUrl = `${protocol}//${host}/ws/${session_id}`
+
     const videoUrl = `http://${host}/api/session/${session_id}/mjpeg`
-    const wsUrl = `ws://${host}/ws/${session_id}`
+
+    console.log('host=', host)
+    console.log('videoUrl=', videoUrl)
+    console.log('wsUrl=', wsUrl)
     set({
       session_id,
       videoUrl: !!session_id ? videoUrl : '',
