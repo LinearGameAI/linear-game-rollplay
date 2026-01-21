@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Gemunu_Libre } from "next/font/google";
+import { Geist, Geist_Mono, Gemunu_Libre, Goldman } from "next/font/google";
 import "@/src/styles/globals.css";
 import { routing } from "@/src/i18n/routing";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
+import { QueryProvider } from "@/src/provider/QueryProvider";
 
 export function generateStaticParams(){
   return routing.locales.map(locale=> ({locale}))
@@ -22,6 +23,12 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const goldman = Goldman({
+  variable: "--font-goldman",
+  subsets: ["latin"],
+  weight: "400"
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -46,10 +53,12 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${gemunuLibre.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${gemunuLibre.variable} ${goldman.variable} antialiased`}
       >
         <NextIntlClientProvider>
-        {children}
+          <QueryProvider>
+            {children}
+          </QueryProvider>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useKeyButtonConfig } from '../context/KeyButtonContext'
 import { cn } from '@/src/common/tool'
+import Image from 'next/image'
 
 interface KeyButtonProps {
   label: string | React.ReactNode
@@ -22,15 +23,12 @@ export default function KeyButton({ label, isActive, className = "" }: KeyButton
       style={dynamicStyle}
       className={cn(
         "relative flex items-center justify-center",
-        "rounded-lg border-2",
-        "font-bold transition-all duration-100 ease-in-out",
-        isActive
-          ? "bg-white/90 text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.6)] scale-95"
-          : "bg-black/30 text-white/70 border-white/30 backdrop-blur-sm",
+        "font-bold font-goldman text-[#1E1849]",
         className
       )}
     >
-      {label}
+      <Image src={'/key_bg.png'} alt="" fill className={cn('absolute inset-0 w-full h-full object-contain z-index-0 transition-all duration-300 ease-out', isActive && 'scale-90')} />
+      <span className='z-index-1 relative'>{label}</span>
     </div>
   )
 }

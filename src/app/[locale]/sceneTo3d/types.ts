@@ -3,9 +3,9 @@ export enum DirectionKey {
   A = 'a',
   S = 's',
   D = 'd',
-  UP = 'arrowup',
-  DOWN = 'arrowdown',
-  LEFT = 'arrowleft',
-  RIGHT = 'arrowright',
+  UP = 'up',
+  DOWN = 'down',
+  LEFT = 'left',
+  RIGHT = 'right',
   NONE = ''
 }

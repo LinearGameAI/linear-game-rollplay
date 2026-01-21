@@ -1,5 +1,8 @@
+'use client';
+
 import React, { useLayoutEffect, useRef } from 'react'
 import { cn } from '@/src/common/tool'
+import Image from 'next/image';
 
 interface ControlAreaProps {
   position: 'left' | 'right'
@@ -19,14 +22,14 @@ export default function ControlArea({ position, className, children }: ControlAr
     const div = ref.current
     if (!div) return
     const { width, height } = div.getBoundingClientRect()
-
+    console.log('width=', width, 'height=', height)
   }, [])
 
   return (
     <div
       ref={ref}
       className={cn(
-        "absolute z-20 w-[40%] aspect-[2/1] mt-[12%]", // Dimensions
+        "absolute z-20 w-[40%] aspect-2/1 mt-[12%]", // Dimensions
         "flex items-center justify-center",
         "transition-all duration-500 ease-out", // Smooth transition
         "group", // Interaction
@@ -34,7 +37,9 @@ export default function ControlArea({ position, className, children }: ControlAr
         className
       )}
     >
-      <img src={'/images/icon1.webp'} alt="" className='opacity-0 group-hover:opacity-100 absolute inset-0 w-full h-full object-cover' />
+      <div className='w-full h-full'>
+        <Image src={'/images/icon1.webp'} fill alt="" className='opacity-0 group-hover:opacity-100 w-full h-full' />
+      </div>
       {children}
     </div>
   )

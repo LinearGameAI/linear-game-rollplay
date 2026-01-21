@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react'
+'use client';
+import { createContext, useContext, useState, ReactNode } from 'react'
 
 export interface KeyButtonConfig {
   width: number
@@ -19,7 +20,7 @@ const defaultConfig: KeyButtonConfig = {
 
 const KeyButtonContext = createContext<KeyButtonContextType | undefined>(undefined)
 
-export function KeyButtonProvider({ children }: { children: ReactNode }) {
+export function KeyButtonProvider({ children }: { children: ReactNode; }) {
   const [config, setConfig] = useState<KeyButtonConfig>(defaultConfig)
 
   return (
