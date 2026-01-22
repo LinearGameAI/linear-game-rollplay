@@ -24,11 +24,11 @@ export const useSceneStore = create<SceneState>((set, get) => ({
   ...initialState,
   setSessionId: (session_id: string) => {
     console.log('session_id=', session_id)
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const host = process.env.NEXT_PUBLIC_API_HOST || '54.71.99.124:8000'
-    const wsUrl = `${protocol}//${host}/ws/${session_id}`
+    const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+    const host = process.env.NEXT_PUBLIC_API_HOST || 'roll-api.lineargame.ai'
+    const wsUrl = `${protocol}://${host}/ws/${session_id}`
 
-    const videoUrl = `http://${host}/api/session/${session_id}/mjpeg`
+    const videoUrl = `https://${host}/api/session/${session_id}/mjpeg`
 
     console.log('host=', host)
     console.log('videoUrl=', videoUrl)

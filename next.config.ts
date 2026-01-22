@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://54.71.99.124:8000/api/:path*',
+        destination: 'https://roll-api.lineargame.ai/api/:path*',
       },
     ];
   },
