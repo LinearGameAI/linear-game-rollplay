@@ -4,13 +4,30 @@ import { useEffect, useState, useRef } from "react"
 import WASDControls from "./components/WASDControls"
 import ArrowControls from "./components/ArrowControls"
 import { DirectionKey } from "./types"
-import { usePostSessionService } from "./services"
 import { useSceneStoreData } from "./store";
+import Joystick from "./components/Joystick";
+import FloatingButton from "./components/FloatingButton";
+import { cn } from "@/src/common/tool";
+
+// Hook to detect screen size
+function useIsSmallScreen(breakpoint: number = 768) {
+  const [isSmall, setIsSmall] = useState(false)
+
+  useEffect(() => {
+    const checkSize = () => setIsSmall(window.innerWidth < breakpoint)
+    checkSize()
+    window.addEventListener('resize', checkSize)
+    return () => window.removeEventListener('resize', checkSize)
+  }, [breakpoint])
+
+  return isSmall
+}
 
 export default function KeyContentView() {
   const { wsUrl } = useSceneStoreData()
   const [keyState, setKeyState] = useState<DirectionKey>(DirectionKey.NONE)
   const wsRef = useRef<WebSocket | null>(null)
+  const isSmallScreen = useIsSmallScreen()
 
   // Manage WebSocket connection
   useEffect(() => {
@@ -92,15 +109,37 @@ export default function KeyContentView() {
     }
   }, [])
 
+  // Handle direction change from Joystick
+  const handleDirectionChange = (dir: DirectionKey) => {
+    console.log('drag direction change:', dir)
+    setKeyState(dir)
+    if (dir === DirectionKey.NONE) {
+      return
+    }
+    // Send WebSocket message
+    if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+      const message = JSON.stringify({ type: "action", action: dir })
+      wsRef.current.send(message)
+    }
+  }
+
   return (
     <>
+      {/* 小屏显示 Joystick，大屏显示 WASDControls */}
       <div className="absolute bottom-8 left-8">
-        <WASDControls activeKey={keyState} />
+        {isSmallScreen ? (
+          <Joystick
+            size={100}
+            onDirectionChange={handleDirectionChange}
+          />
+        ) : (
+            <WASDControls activeKey={keyState} />
+        )}
       </div>
 
-      <div className="absolute bottom-8 right-8">
-        <ArrowControls activeKey={keyState} />
-      </div></>
-
+      <div className={cn("absolute bottom-8 right-8")}>
+        {isSmallScreen ? <FloatingButton onDirectionChange={handleDirectionChange} /> : <ArrowControls activeKey={keyState} />}
+      </div>
+    </>
   )
 }
